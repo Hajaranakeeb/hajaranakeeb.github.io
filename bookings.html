@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DJ Angie | Booking</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js"></script>
+
+<style>
+body, html {
+  margin: 0;
+  padding: 0;
+  background: #000;
+  font-family: Arial, sans-serif;
+  color: white;
+}
+
+/* NAVBAR */
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 45px;
+  background: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  border-bottom: 2px solid red;
+}
+
+.navbar a {
+  color: white;
+  text-decoration: none;
+  margin: 0 25px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.navbar a:hover {
+  color: red;
+}
+
+/* HERO */
+.hero {
+  padding-top: 120px;
+  text-align: center;
+}
+
+.hero-text {
+  font-family: 'Great Vibes', cursive;
+  font-size: 5rem;
+  color: rgb(203, 189, 81);
+  text-shadow: 0 0 15px rgb(227, 191, 107);
+}
+
+/* SECTION TITLES */
+.section-title {
+  text-align: center;
+  font-family: 'Great Vibes', cursive;
+  font-size: 3rem;
+  color: rgb(215, 202, 112);
+  margin-top: 60px;
+  text-shadow: 0 0 10px red;
+}
+
+/* CALENDAR WRAPPER (UNCHANGED COLORS) */
+.embed-wrapper {
+  max-width: 1000px;
+  margin: 40px auto 20px;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 0 25px red;
+  background: black;
+  padding: 15px;
+}
+
+/* FIX: Hide calendar until rendered */
+#customCalendar {
+  visibility: hidden;
+}
+
+/* Legend */
+.calendar-legend {
+  max-width: 700px;
+  margin: 20px auto 40px;
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.legend-color {
+  width: 20px;
+  height: 20px;
+  border-radius: 5px;
+}
+
+.gold-box { background: gold; }
+.red-box { background: red; }
+
+/* DEPOSIT BOX */
+.deposit-instruction {
+  max-width: 700px;
+  margin: 20px auto;
+  padding: 25px;
+  background: rgba(255,0,0,0.08);
+  border: 2px solid rgb(217, 228, 138);
+  border-radius: 12px;
+  text-align: center;
+  font-size: 1.1rem;
+  box-shadow: 0 0 20px rgb(133, 29, 24);
+}
+
+.deposit-instruction strong {
+  color: rgb(198, 209, 117);
+}
+
+.payment-warning {
+  margin-top: 18px;
+  padding: 15px;
+  background: black;
+  border: 2px solid rgb(208, 194, 117);
+  border-radius: 8px;
+  color: rgb(202, 183, 107);
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* FORM */
+form {
+  max-width: 700px;
+  margin: 40px auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  background: rgba(7,1,1,0.65);
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 0 25px red;
+}
+
+input {
+  padding: 12px;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: 1px solid rgb(21, 9, 9);
+  background: rgb(216, 193, 116);
+  color: white;
+}
+
+input:focus {
+  outline: none;
+  box-shadow: 0 0 10px red;
+}
+
+button {
+  padding: 15px;
+  font-size: 1.2rem;
+  border-radius: 10px;
+  border: none;
+  background: red;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  background: black;
+  border: 2px solid red;
+}
+
+.thank-you {
+  text-align: center;
+  font-size: 1.8rem;
+  color: red;
+  margin-top: 20px;
+  font-family: 'Great Vibes', cursive;
+}
+</style>
+</head>
+
+<body>
+
+<div class="navbar">
+  <a href="Home.html">Home</a>
+  <a href="about.html">About</a>
+  <a href="services.html">Services</a>
+  <a href="bookings.html">Bookings</a>
+</div>
+
+<section class="hero">
+  <div class="hero-text">Book DJ Angi</div>
+</section>
+
+<h2 class="section-title">Check Availability</h2>
+<div id="customCalendar" class="embed-wrapper"></div>
+
+<div class="calendar-legend">
+  <div class="legend-item">
+    <span class="legend-color gold-box"></span>
+    <span>Available Date</span>
+  </div>
+  <div class="legend-item">
+    <span class="legend-color red-box"></span>
+    <span>Booked / Not Available</span>
+  </div>
+</div>
+
+<h2 class="section-title">Submit Booking Request</h2>
+
+<div class="deposit-instruction">
+  ⚠️ Please send your required deposit via Zelle BEFORE submitting this booking form.<br><br>
+
+  📱 Zelle Phone Number: <strong>313-742-2607</strong><br>
+  👤 Zelle Name: <strong>Angi Hammoud</strong>
+
+  <div class="payment-warning">
+    IF PAYMENT IS NOT SENT, DJ ANGIE WILL NOT CONFIRM YOUR BOOKING.
+  </div>
+</div>
+
+<form id="bookingForm">
+  <input type="text" name="entry.1117076302" placeholder="Full Name" required>
+  <input type="date" name="entry.1985553080" required>
+  <input type="text" name="entry.1877564591" placeholder="Event Type" required>
+  <input type="text" name="entry.632383114" placeholder="Event Location" required>
+  <input type="text" name="entry.173812835" placeholder="Package Chosen" required>
+  <input type="email" name="entry.983264469" placeholder="Client Email" required>
+  <input type="tel" name="entry.1456154399" placeholder="Client Phone Number" required>
+  <input type="number" name="entry.888033668" placeholder="Deposit Amount Paid" required>
+  <button type="submit">Submit Booking</button>
+</form>
+
+<div id="thankMessage" class="thank-you" style="display:none;">
+  Thank you for booking!
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+
+  const calendar = new FullCalendar.Calendar(
+    document.getElementById('customCalendar'),
+    {
+      initialView: 'dayGridMonth',
+      height: 600,
+
+      dayCellDidMount: function(info) {
+        info.el.style.backgroundColor = 'gold';
+        info.el.style.color = 'black';
+      },
+
+      dateClick: function(info) {
+        if (info.dayEl.classList.contains("booked-day")) {
+          alert("This date is already booked.");
+          return;
+        }
+        document.querySelector('input[name="entry.1985553080"]').value = info.dateStr;
+      }
+    }
+  );
+
+  calendar.render();
+
+  /* FIX: Show calendar only after it fully renders */
+  document.getElementById('customCalendar').style.visibility = 'visible';
+
+  const sheetCSV = "YOUR CSV LINK HERE";
+
+  function formatDate(input) {
+    if (input.includes('/')) {
+      const parts = input.split('/');
+      return `${parts[2]}-${parts[0].padStart(2,'0')}-${parts[1].padStart(2,'0')}`;
+    }
+    return input.trim();
+  }
+
+  function loadBusyDays() {
+    fetch(sheetCSV + "&t=" + new Date().getTime())
+      .then(res => res.text())
+      .then(csv => {
+        const lines = csv.split('\n').slice(1);
+        const busyDays = lines
+          .map(line => line.split(',')[0].trim())
+          .filter(d => d)
+          .map(formatDate);
+
+        document.querySelectorAll('.fc-daygrid-day').forEach(day => {
+          day.style.backgroundColor = 'gold';
+          day.style.color = 'black';
+          day.classList.remove('booked-day');
+        });
+
+        busyDays.forEach(date => {
+          const cell = document.querySelector(`[data-date="${date}"]`);
+          if (cell) {
+            cell.style.backgroundColor = 'red';
+            cell.style.color = 'white';
+            cell.classList.add('booked-day');
+          }
+        });
+      });
+  }
+
+  loadBusyDays();
+  setInterval(loadBusyDays, 20000);
+
+});
+</script>
+
+</body>
+</html>
