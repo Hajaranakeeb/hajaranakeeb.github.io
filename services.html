@@ -50,20 +50,16 @@ body, html {
   height: 100vh;
   display: flex;
   align-items: center;
-  justify-content: space-between; /* Split text left/right */
+  justify-content: space-between;
   padding: 0 50px;
   overflow: hidden;
-
-  /* Crystal clear image + red glow on sides + black background */
   background:
     linear-gradient(to left, rgba(255,0,0,0.4), transparent 40%),
     linear-gradient(to right, rgba(255,0,0,0.4), transparent 40%),
     url("Angie3.jpg") center center / contain no-repeat;
-
   background-color: black;
 }
 
-/* Animated red smoke behind the image */
 .hero::after {
   content: "";
   position: absolute;
@@ -87,13 +83,8 @@ body, html {
   animation: fadeText 2s ease forwards 1s;
 }
 
-.hero-text-left {
-  text-align: left;
-}
-
-.hero-text-right {
-  text-align: right;
-}
+.hero-text-left { text-align: left; }
+.hero-text-right { text-align: right; }
 
 /* PACKAGES SECTION */
 .packages {
@@ -122,20 +113,9 @@ body, html {
   box-shadow: 0 0 25px red, 0 0 50px gold;
 }
 
-.package-card h3 {
-  color: red;
-  margin-bottom: 10px;
-}
-
-.price {
-  font-size: 20px;
-  margin: 10px 0;
-}
-
-.deposit {
-  color: rgb(255,180,0);
-  font-weight: bold;
-}
+.package-card h3 { color: red; margin-bottom: 10px; }
+.price { font-size: 20px; margin: 10px 0; }
+.deposit { color: rgb(255,180,0); font-weight: bold; }
 
 /* TERMS SECTION */
 .terms {
@@ -161,25 +141,37 @@ body, html {
 }
 
 /* ANIMATIONS */
-@keyframes fadeText {
-  to { opacity: 1; }
-}
+@keyframes fadeText { to { opacity: 1; } }
+@keyframes fadePackages { to { opacity: 1; transform: translateY(0); } }
+@keyframes smokeMove { 0% { background-position: 0 0; } 100% { background-position: 1000px 0; } }
 
-@keyframes fadePackages {
-  to {
-    opacity: 1;
-    transform: translateY(0);
+/* ============================ */
+/* MOBILE STYLES */
+@media screen and (max-width: 768px) {
+  .hero {
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 60px 20px;
+    height: auto;
   }
-}
 
-@keyframes smokeMove {
-  0% { background-position: 0 0; }
-  100% { background-position: 1000px 0; }
+  /* Stack the text and prevent shrinking too small */
+  .hero-text-left, .hero-text-right {
+    font-size: 8vw;
+    text-align: center !important;
+    display: block;
+    width: 100%;
+    max-width: 400px;     /* <-- ensures it doesn't get crushed */
+    margin: 0 auto;
+  }
+
+  .hero-text-left { margin-top: 120px; } /* push the first line down */
+  .hero-text-right { margin-top: 20px; } /* spacing below */
 }
 </style>
 </head>
 <body>
-  
+
 <div class="navbar">
   <a href="index.html">Home</a>
   <a href="about.html">About</a>
@@ -190,7 +182,7 @@ body, html {
 <!-- HERO -->
 <section class="hero">
   <div class="hero-text-left">Provided</div>
-  <div class="hero-text-right">Service</div>
+  <div class="hero-text-right">Services</div>
 </section>
 
 <!-- PACKAGES -->
@@ -200,43 +192,36 @@ body, html {
     <div class="price">$1200</div>
     <div class="deposit">Deposit: $200</div>
   </div>
-
   <div class="package-card">
     <h3>Premium Package</h3>
     <div class="price">$1650</div>
     <div class="deposit">Deposit: $250</div>
   </div>
-
   <div class="package-card">
     <h3>Luxury Package</h3>
     <div class="price">$1900</div>
     <div class="deposit">Deposit: $300</div>
   </div>
-
   <div class="package-card">
     <h3>DJ Only Package</h3>
     <div class="price">$850</div>
     <div class="deposit">Deposit: $150</div>
   </div>
-
   <div class="package-card">
     <h3>Travel Lit Package</h3>
     <div class="price">$2700</div>
     <div class="deposit">Deposit: $300</div>
   </div>
-
   <div class="package-card">
     <h3>Travel Premium</h3>
     <div class="price">$3100</div>
     <div class="deposit">Deposit: $350</div>
   </div>
-
   <div class="package-card">
     <h3>Travel Luxury</h3>
     <div class="price">$3700</div>
     <div class="deposit">Deposit: $400</div>
   </div>
-
   <div class="package-card">
     <h3>Travel DJ Only</h3>
     <div class="price">$2300</div>
