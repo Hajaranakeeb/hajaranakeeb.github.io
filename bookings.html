@@ -67,7 +67,7 @@ body, html {
   text-shadow: 0 0 10px red;
 }
 
-/* CALENDAR WRAPPER (UNCHANGED COLORS) */
+/* CALENDAR WRAPPER */
 .embed-wrapper {
   max-width: 1000px;
   margin: 40px auto 20px;
@@ -78,12 +78,10 @@ body, html {
   padding: 15px;
 }
 
-/* FIX: Hide calendar until rendered */
 #customCalendar {
   visibility: hidden;
 }
 
-/* Legend */
 .calendar-legend {
   max-width: 700px;
   margin: 20px auto 40px;
@@ -221,7 +219,6 @@ button:hover {
 
 <div class="deposit-instruction">
   ⚠️ Please send your required deposit via Zelle BEFORE submitting this booking form.<br><br>
-
   📱 Zelle Phone Number: <strong>313-742-2607</strong><br>
   👤 Zelle Name: <strong>Angi Hammoud</strong>
 
@@ -230,7 +227,12 @@ button:hover {
   </div>
 </div>
 
-<form id="bookingForm">
+<form 
+action="https://docs.google.com/forms/d/e/1FAIpQLSe5hJMvZpTiK1yMqF5G1Sl_pwbvxNC3i6F1t6HdzfwOf-Jw_Q/formResponse"
+method="POST"
+target="hidden_iframe"
+id="bookingForm">
+
   <input type="text" name="entry.1117076302" placeholder="Full Name" required>
   <input type="date" name="entry.1985553080" required>
   <input type="text" name="entry.1877564591" placeholder="Event Type" required>
@@ -242,79 +244,135 @@ button:hover {
   <button type="submit">Submit Booking</button>
 </form>
 
+<iframe name="hidden_iframe" style="display:none;"></iframe>
+
 <div id="thankMessage" class="thank-you" style="display:none;">
   Thank you for booking!
 </div>
 
+<!-- ================= CANCELLATION FORM ================= -->
+<h2 class="section-title">Request to Cancel Your Event</h2>
+
+<div class="deposit-instruction">
+  ⚠️ Please make sure all information is correct before submitting your cancellation request.<br><br>
+  📱 Contact Number (optional for verification): <strong>313-742-2607</strong><br>
+  👤 Form Name: <strong>DJ Angi Cancellation Form</strong>
+</div>
+
+<form 
+  action="https://docs.google.com/forms/d/e/1FAIpQLSewMX8lg2vw48tlYUHhuK452-tmPalyD-g-VE9q9QaBsanE8A/formResponse"
+  method="POST"
+  target="hidden_iframe_cancellation"
+  id="cancellationForm"
+>
+  <input type="text" name="entry.1977486677" placeholder="Full Name" required>
+  <input type="text" name="entry.863166612" placeholder="Last Name" required>
+  <input type="date" name="entry.992627242" placeholder="Event Date" required>
+  <input type="email" name="entry.1284371374" placeholder="Email" required>
+  <input type="tel" name="entry.717600649" placeholder="Phone Number" required>
+
+  <button type="submit">Submit Cancellation</button>
+</form>
+
+<iframe name="hidden_iframe_cancellation" style="display:none;"></iframe>
+
+<div id="thankMessageCancellation" class="thank-you" style="display:none;">
+  Your cancellation has been submitted!
+</div>
+
+<!-- 🔥 FIXED GOOGLE SHEETS CONNECTED CALENDAR SCRIPT -->
 <script>
 document.addEventListener('DOMContentLoaded', function() {
 
-  const calendar = new FullCalendar.Calendar(
-    document.getElementById('customCalendar'),
-    {
-      initialView: 'dayGridMonth',
-      height: 600,
-
-      dayCellDidMount: function(info) {
-        info.el.style.backgroundColor = 'gold';
-        info.el.style.color = 'black';
-      },
-
-      dateClick: function(info) {
-        if (info.dayEl.classList.contains("booked-day")) {
-          alert("This date is already booked.");
-          return;
-        }
-        document.querySelector('input[name="entry.1985553080"]').value = info.dateStr;
-      }
-    }
-  );
-
-  calendar.render();
-
-  /* FIX: Show calendar only after it fully renders */
-  document.getElementById('customCalendar').style.visibility = 'visible';
-
-  const sheetCSV = "YOUR CSV LINK HERE";
+  const sheetCSV = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTwHNh_h-TUK5B33AroveD-CPlhtaogJ3QlmqC9zVzgqqB-5w02zqaKf_N4-xgx-6yJM1To6lfscY2H/pub?output=csv";
 
   function formatDate(input) {
-    if (input.includes('/')) {
-      const parts = input.split('/');
-      return `${parts[2]}-${parts[0].padStart(2,'0')}-${parts[1].padStart(2,'0')}`;
+    let parts = input.split('/');
+    if(parts.length === 3){
+      let mm = parts[0].padStart(2,'0');
+      let dd = parts[1].padStart(2,'0');
+      let yyyy = parts[2];
+      return `${yyyy}-${mm}-${dd}`;
     }
     return input.trim();
   }
 
-  function loadBusyDays() {
-    fetch(sheetCSV + "&t=" + new Date().getTime())
-      .then(res => res.text())
-      .then(csv => {
-        const lines = csv.split('\n').slice(1);
-        const busyDays = lines
-          .map(line => line.split(',')[0].trim())
-          .filter(d => d)
-          .map(formatDate);
+  const calendarEl = document.getElementById('customCalendar');
 
-        document.querySelectorAll('.fc-daygrid-day').forEach(day => {
-          day.style.backgroundColor = 'gold';
-          day.style.color = 'black';
-          day.classList.remove('booked-day');
-        });
+  const calendar = new FullCalendar.Calendar(calendarEl, {
+    initialView: 'dayGridMonth',
+    height: 600,
+    dayCellDidMount: function(info) {
+      info.el.style.backgroundColor = 'gold';
+      info.el.style.color = 'black';
+    },
+    dateClick: function(info) {
+      if(info.dayEl.classList.contains('booked-day')){
+        alert('This date is already booked.');
+        return;
+      }
+      document.querySelector('input[name="entry.1985553080"]').value = info.dateStr;
+    }
+  });
 
-        busyDays.forEach(date => {
-          const cell = document.querySelector(`[data-date="${date}"]`);
-          if (cell) {
-            cell.style.backgroundColor = 'red';
-            cell.style.color = 'white';
-            cell.classList.add('booked-day');
-          }
-        });
+  calendar.render();
+  calendarEl.style.visibility = 'visible';
+
+  async function loadBusyDays() {
+    try {
+      const res = await fetch(sheetCSV + "&t=" + new Date().getTime());
+      const csv = await res.text();
+      const lines = csv.split('\n').slice(1); // skip header
+      const busyDates = lines
+        .map(line => line.split(',')[0]?.trim()) // column A
+        .filter(d => d)
+        .map(formatDate);
+
+      document.querySelectorAll('.fc-daygrid-day').forEach(day => {
+        day.style.backgroundColor = 'gold';
+        day.style.color = 'black';
+        day.classList.remove('booked-day');
       });
+
+      busyDates.forEach(date => {
+        const cell = document.querySelector(`[data-date="${date}"]`);
+        if(cell){
+          cell.style.backgroundColor = 'red';
+          cell.style.color = 'white';
+          cell.classList.add('booked-day');
+        }
+      });
+    } catch(e){
+      console.error("Error loading busy days:", e);
+    }
   }
 
   loadBusyDays();
-  setInterval(loadBusyDays, 20000);
+  setInterval(loadBusyDays, 20000); // refresh every 20 seconds
+});
+</script>
 
+<script>
+const form = document.getElementById('bookingForm');
+const thankMsg = document.getElementById('thankMessage');
+
+form.addEventListener('submit', function(e) {
+  thankMsg.style.display = 'block';
+  thankMsg.scrollIntoView({ behavior: 'smooth' });
+  setTimeout(() => {
+    window.location.reload();
+  }, 3000);
+});
+
+const cancelForm = document.getElementById('cancellationForm');
+const thankMsgCancel = document.getElementById('thankMessageCancellation');
+
+cancelForm.addEventListener('submit', function(e) {
+  thankMsgCancel.style.display = 'block';
+  thankMsgCancel.scrollIntoView({ behavior: 'smooth' });
+  setTimeout(() => {
+    window.location.reload();
+  }, 3000);
 });
 </script>
 
