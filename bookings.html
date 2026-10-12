@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DJ Angie | Booking</title>
+<title>DJ Angi | Booking</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
 <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.css" rel="stylesheet">
@@ -18,7 +18,6 @@ body, html {
   color: white;
 }
 
-/* NAVBAR */
 .navbar {
   position: fixed;
   top: 0;
@@ -44,7 +43,6 @@ body, html {
   color: red;
 }
 
-/* HERO */
 .hero {
   padding-top: 120px;
   text-align: center;
@@ -57,7 +55,6 @@ body, html {
   text-shadow: 0 0 15px rgb(227, 191, 107);
 }
 
-/* SECTION TITLES */
 .section-title {
   text-align: center;
   font-family: 'Great Vibes', cursive;
@@ -67,7 +64,6 @@ body, html {
   text-shadow: 0 0 10px red;
 }
 
-/* NOTE UNDER CHECK AVAILABILITY */
 .calendar-note {
   box-sizing: border-box;
   max-width: 760px;
@@ -82,7 +78,6 @@ body, html {
   color: gold;
 }
 
-/* CALENDAR WRAPPER */
 .embed-wrapper {
   max-width: 1000px;
   margin: 40px auto 20px;
@@ -120,7 +115,6 @@ body, html {
 .gold-box { background: gold; }
 .red-box { background: red; }
 
-/* DEPOSIT BOX */
 .deposit-instruction {
   box-sizing: border-box;
   max-width: 700px;
@@ -152,16 +146,9 @@ body, html {
   line-height: 1.5;
 }
 
-@media (max-width: 760px) {
-  .calendar-note,
-  .deposit-instruction {
-    width: calc(100% - 32px);
-    padding: 16px;
-  }
-}
-
-/* FORM */
 form {
+  box-sizing: border-box;
+  width: calc(100% - 32px);
   max-width: 700px;
   margin: 40px auto;
   display: flex;
@@ -173,13 +160,21 @@ form {
   box-shadow: 0 0 25px red;
 }
 
+form label {
+  color: rgb(215, 202, 112);
+  font-weight: bold;
+  margin-bottom: -12px;
+}
+
 input {
+  box-sizing: border-box;
+  width: 100%;
   padding: 12px;
   font-size: 1rem;
   border-radius: 8px;
   border: 1px solid rgb(21, 9, 9);
   background: rgb(216, 193, 116);
-  color: white;
+  color: black;
 }
 
 input:focus {
@@ -208,8 +203,38 @@ button:hover {
   text-align: center;
   font-size: 1.8rem;
   color: red;
-  margin-top: 20px;
+  margin: 20px auto;
   font-family: 'Great Vibes', cursive;
+}
+
+@media (max-width: 760px) {
+  .calendar-note,
+  .deposit-instruction {
+    width: calc(100% - 32px);
+    padding: 16px;
+  }
+
+  .navbar a {
+    margin: 0 10px;
+    font-size: 0.85rem;
+  }
+
+  .hero-text {
+    font-size: 3.5rem;
+  }
+
+  .section-title {
+    font-size: 2.5rem;
+  }
+
+  .calendar-legend {
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  form {
+    padding: 20px;
+  }
 }
 </style>
 </head>
@@ -230,7 +255,7 @@ button:hover {
 <h2 class="section-title">Check Availability</h2>
 
 <div class="calendar-note">
-  Booked days will appear 30 seconds to a minute after visiting
+  Booked days will appear 30 seconds to a minute after visiting.
 </div>
 
 <div id="customCalendar" class="embed-wrapper"></div>
@@ -246,17 +271,18 @@ button:hover {
   </div>
 </div>
 
-<!-- ================= BOOKING FORM NOTE ADDED ================= -->
 <h2 class="section-title">Submit Booking Request</h2>
 
 <div class="calendar-note">
-  ⚠️ If a confirmation email for your event is not emailed to you within 24 hours, please contact DJ Angi.
+  ⚠️ If a confirmation email for your event is not emailed to you within
+  24 hours, please contact DJ Angi.
 </div>
 
 <div class="deposit-instruction">
-  ⚠️ Please send your required deposit via Zelle BEFORE submitting this booking form.<br><br>
-  Make sure to put your full name in the zelle message box!<br>
-  <br>
+  ⚠️ Please send your required deposit via Zelle BEFORE submitting this booking form.
+  <br><br>
+  Make sure to put your full name in the Zelle message box!
+  <br><br>
   📱 Zelle Phone Number: <strong>313-742-2607</strong><br>
   👤 Zelle Name: <strong>Angi Hammoud</strong>
 
@@ -266,23 +292,91 @@ button:hover {
 </div>
 
 <div style="text-align:center; font-size:1.4rem; color:gold; font-weight:bold; margin:25px auto;">
-  read terms and conditions before booking
+  Read terms and conditions before booking.
 </div>
 
-<form 
-action="https://docs.google.com/forms/d/e/1FAIpQLSe5hJMvZpTiK1yMqF5G1Sl_pwbvxNC3i6F1t6HdzfwOf-Jw_Q/formResponse"
-method="POST"
-target="hidden_iframe"
-id="bookingForm">
+<form
+  action="https://docs.google.com/forms/d/e/1FAIpQLSe5hJMvZpTiK1yMqF5G1Sl_pwbvxNC3i6F1t6HdzfwOf-Jw_Q/formResponse"
+  method="POST"
+  target="hidden_iframe"
+  id="bookingForm"
+>
+  <input
+    type="text"
+    name="entry.1117076302"
+    placeholder="Full Name"
+    required
+  >
 
-  <input type="text" name="entry.1117076302" placeholder="Full Name" required>
-  <input type="date" name="entry.1985553080" required>
-  <input type="text" name="entry.1877564591" placeholder="Event Type" required>
-  <input type="text" name="entry.632383114" placeholder="Event Location" required>
-  <input type="text" name="entry.173812835" placeholder="Package Chosen" required>
-  <input type="email" name="entry.983264469" placeholder="Client Email" required>
-  <input type="tel" name="entry.1456154399" placeholder="Client Phone Number" required>
-  <input type="number" name="entry.888033668" placeholder="Deposit Amount Paid" required>
+  <input
+    type="date"
+    name="entry.1985553080"
+    aria-label="Date Of Event"
+    required
+  >
+
+  <input
+    type="text"
+    name="entry.1877564591"
+    placeholder="Event Type"
+    required
+  >
+
+  <input
+    type="text"
+    name="entry.632383114"
+    placeholder="Event Location"
+    required
+  >
+
+  <input
+    type="text"
+    name="entry.173812835"
+    placeholder="Package Chosen"
+    required
+  >
+
+  <input
+    type="email"
+    name="entry.983264469"
+    placeholder="Client Email"
+    required
+  >
+
+  <input
+    type="tel"
+    name="entry.1456154399"
+    placeholder="Client Phone Number"
+    required
+  >
+
+  <input
+    type="number"
+    name="entry.888033668"
+    placeholder="Deposit Amount Paid"
+    min="0"
+    step="0.01"
+    required
+  >
+
+  <!-- Event Start Time: connected to Google Forms -->
+  <label for="eventStartTime">Event Start Time</label>
+  <input
+    type="time"
+    id="eventStartTime"
+    name="entry.645679736"
+    required
+  >
+
+  <!-- Event End Time: connected to Google Forms -->
+  <label for="eventEndTime">Event End Time</label>
+  <input
+    type="time"
+    id="eventEndTime"
+    name="entry.1780322233"
+    required
+  >
+
   <button type="submit">Submit Booking</button>
 </form>
 
@@ -292,34 +386,64 @@ id="bookingForm">
   Thank you for booking!
 </div>
 
-<!-- ================= CANCELLATION FORM NOTE ADDED ================= -->
 <h2 class="section-title">Request to Cancel Your Event</h2>
 
 <div class="calendar-note">
-  ⚠️ if  your Cancellation request is not  confirmaed  to your email  within 24 hours please Contact DJ Angi 
+  ⚠️ If your cancellation request is not confirmed by email within 24 hours,
+  please contact DJ Angi.
 </div>
 
 <div class="deposit-instruction">
-  ⚠️ Please make sure all information is correct before submitting your cancellation request.<br><br>
+  ⚠️ Please make sure all information is correct before submitting your cancellation request.
+  <br><br>
   📱 Contact Number (optional for verification): <strong>313-742-2607</strong><br>
   👤 Form Name: <strong>DJ Angi Cancellation Form</strong>
 </div>
 
 <div style="text-align:center; font-size:1.4rem; color:gold; font-weight:bold; margin:25px auto;">
-  read terms and conditions before cancelling
+  Read terms and conditions before cancelling.
 </div>
 
-<form 
+<form
   action="https://docs.google.com/forms/d/e/1FAIpQLSewMX8lg2vw48tlYUHhuK452-tmPalyD-g-VE9q9QaBsanE8A/formResponse"
   method="POST"
   target="hidden_iframe_cancellation"
   id="cancellationForm"
 >
-  <input type="text" name="entry.1977486677" placeholder="Full Name" required>
-  <input type="text" name="entry.863166612" placeholder="Last Name" required>
-  <input type="date" name="entry.992627242" placeholder="Event Date" required>
-  <input type="email" name="entry.1284371374" placeholder="Email" required>
-  <input type="tel" name="entry.717600649" placeholder="Phone Number" required>
+  <input
+    type="text"
+    name="entry.1977486677"
+    placeholder="Full Name"
+    required
+  >
+
+  <input
+    type="text"
+    name="entry.863166612"
+    placeholder="Last Name"
+    required
+  >
+
+  <input
+    type="date"
+    name="entry.992627242"
+    aria-label="Event Date"
+    required
+  >
+
+  <input
+    type="email"
+    name="entry.1284371374"
+    placeholder="Email"
+    required
+  >
+
+  <input
+    type="tel"
+    name="entry.717600649"
+    placeholder="Phone Number"
+    required
+  >
 
   <button type="submit">Submit Cancellation</button>
 </form>
@@ -330,21 +454,50 @@ id="bookingForm">
   Your cancellation has been submitted!
 </div>
 
-<!-- ================= CALENDAR SCRIPT ================= -->
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-
-  const sheetCSV = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTwHNh_h-TUK5B33AroveD-CPlhtaogJ3QlmqC9zVzgqqB-5w02zqaKf_N4-xgx-6yJM1To6lfscY2H/pub?output=csv";
+  const sheetCSV =
+    "https://docs.google.com/spreadsheets/d/e/2PACX-1vTwHNh_h-TUK5B33AroveD-CPlhtaogJ3QlmqC9zVzgqqB-5w02zqaKf_N4-xgx-6yJM1To6lfscY2H/pub?output=csv";
 
   function formatDate(input) {
-    let parts = input.split('/');
-    if(parts.length === 3){
-      let mm = parts[0].padStart(2,'0');
-      let dd = parts[1].padStart(2,'0');
-      let yyyy = parts[2];
+    const value = input.trim();
+    const parts = value.split('/');
+
+    if (parts.length === 3) {
+      const mm = parts[0].padStart(2, '0');
+      const dd = parts[1].padStart(2, '0');
+      const yyyy = parts[2];
       return `${yyyy}-${mm}-${dd}`;
     }
-    return input.trim();
+
+    return value;
+  }
+
+  function parseCSVLine(line) {
+    const result = [];
+    let current = '';
+    let inQuotes = false;
+
+    for (let i = 0; i < line.length; i++) {
+      const char = line[i];
+
+      if (char === '"') {
+        if (inQuotes && line[i + 1] === '"') {
+          current += '"';
+          i++;
+        } else {
+          inQuotes = !inQuotes;
+        }
+      } else if (char === ',' && !inQuotes) {
+        result.push(current);
+        current = '';
+      } else {
+        current += char;
+      }
+    }
+
+    result.push(current);
+    return result;
   }
 
   const calendarEl = document.getElementById('customCalendar');
@@ -352,16 +505,21 @@ document.addEventListener('DOMContentLoaded', function() {
   const calendar = new FullCalendar.Calendar(calendarEl, {
     initialView: 'dayGridMonth',
     height: 600,
+
     dayCellDidMount: function(info) {
       info.el.style.backgroundColor = 'gold';
       info.el.style.color = 'black';
     },
+
     dateClick: function(info) {
-      if(info.dayEl.classList.contains('booked-day')){
+      if (info.dayEl.classList.contains('booked-day')) {
         alert('This date is already booked.');
         return;
       }
-      document.querySelector('input[name="entry.1985553080"]').value = info.dateStr;
+
+      document.querySelector(
+        'input[name="entry.1985553080"]'
+      ).value = info.dateStr;
     }
   });
 
@@ -370,12 +528,21 @@ document.addEventListener('DOMContentLoaded', function() {
 
   async function loadBusyDays() {
     try {
-      const res = await fetch(sheetCSV + "&t=" + new Date().getTime());
+      const res = await fetch(
+        sheetCSV + "&t=" + new Date().getTime()
+      );
+
+      if (!res.ok) {
+        throw new Error('Unable to load calendar data.');
+      }
+
       const csv = await res.text();
-      const lines = csv.split('\n').slice(1); // skip header
+      const lines = csv.split(/\r?\n/).slice(1);
+
       const busyDates = lines
-        .map(line => line.split(',')[0]?.trim()) // column A
-        .filter(d => d)
+        .filter(line => line.trim())
+        .map(line => parseCSVLine(line)[0]?.trim())
+        .filter(Boolean)
         .map(formatDate);
 
       document.querySelectorAll('.fc-daygrid-day').forEach(day => {
@@ -385,42 +552,46 @@ document.addEventListener('DOMContentLoaded', function() {
       });
 
       busyDates.forEach(date => {
-        const cell = document.querySelector(`[data-date="${date}"]`);
-        if(cell){
+        const cell = document.querySelector(
+          `[data-date="${date}"]`
+        );
+
+        if (cell) {
           cell.style.backgroundColor = 'red';
           cell.style.color = 'white';
           cell.classList.add('booked-day');
         }
       });
-    } catch(e){
-      console.error("Error loading busy days:", e);
+    } catch (error) {
+      console.error('Error loading busy days:', error);
     }
   }
 
   loadBusyDays();
-  setInterval(loadBusyDays, 20000); // refresh every 20 seconds
+  setInterval(loadBusyDays, 20000);
 });
-</script>
 
-<script>
-const form = document.getElementById('bookingForm');
-const thankMsg = document.getElementById('thankMessage');
+const bookingForm = document.getElementById('bookingForm');
+const thankMessage = document.getElementById('thankMessage');
 
-form.addEventListener('submit', function(e) {
-  thankMsg.style.display = 'block';
-  thankMsg.scrollIntoView({ behavior: 'smooth' });
-  setTimeout(() => {
+bookingForm.addEventListener('submit', function() {
+  thankMessage.style.display = 'block';
+  thankMessage.scrollIntoView({ behavior: 'smooth' });
+
+  setTimeout(function() {
     window.location.reload();
   }, 3000);
 });
 
-const cancelForm = document.getElementById('cancellationForm');
-const thankMsgCancel = document.getElementById('thankMessageCancellation');
+const cancellationForm = document.getElementById('cancellationForm');
+const cancellationMessage =
+  document.getElementById('thankMessageCancellation');
 
-cancelForm.addEventListener('submit', function(e) {
-  thankMsgCancel.style.display = 'block';
-  thankMsgCancel.scrollIntoView({ behavior: 'smooth' });
-  setTimeout(() => {
+cancellationForm.addEventListener('submit', function() {
+  cancellationMessage.style.display = 'block';
+  cancellationMessage.scrollIntoView({ behavior: 'smooth' });
+
+  setTimeout(function() {
     window.location.reload();
   }, 3000);
 });
