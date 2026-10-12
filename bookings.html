@@ -69,11 +69,17 @@ body, html {
 
 /* NOTE UNDER CHECK AVAILABILITY */
 .calendar-note {
+  box-sizing: border-box;
+  max-width: 760px;
   text-align: center;
-  margin: 10px 0 20px 0;
-  font-size: 1.5rem;
+  margin: 14px auto 22px;
+  padding: 14px 20px;
+  border-left: 4px solid gold;
+  border-radius: 8px;
+  background: rgba(255, 215, 0, 0.08);
+  font-size: 1.05rem;
+  line-height: 1.6;
   color: gold;
-  text-shadow: 0 0 10px red, 0 0 20px gold;
 }
 
 /* CALENDAR WRAPPER */
@@ -116,15 +122,17 @@ body, html {
 
 /* DEPOSIT BOX */
 .deposit-instruction {
+  box-sizing: border-box;
   max-width: 700px;
-  margin: 20px auto;
-  padding: 25px;
-  background: rgba(255,0,0,0.08);
-  border: 2px solid rgb(217, 228, 138);
-  border-radius: 12px;
+  margin: 22px auto;
+  padding: 24px 28px;
+  background: rgba(255, 215, 0, 0.07);
+  border: 1px solid rgb(217, 228, 138);
+  border-radius: 14px;
   text-align: center;
-  font-size: 1.1rem;
-  box-shadow: 0 0 20px rgb(133, 29, 24);
+  font-size: 1.05rem;
+  line-height: 1.7;
+  box-shadow: 0 8px 24px rgba(133, 29, 24, 0.35);
 }
 
 .deposit-instruction strong {
@@ -132,15 +140,24 @@ body, html {
 }
 
 .payment-warning {
-  margin-top: 18px;
-  padding: 15px;
-  background: black;
-  border: 2px solid rgb(208, 194, 117);
+  margin-top: 20px;
+  padding: 13px 16px;
+  background: rgba(0, 0, 0, 0.65);
+  border: 1px solid rgb(208, 194, 117);
   border-radius: 8px;
   color: rgb(202, 183, 107);
   font-weight: bold;
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: 0.06em;
+  line-height: 1.5;
+}
+
+@media (max-width: 760px) {
+  .calendar-note,
+  .deposit-instruction {
+    width: calc(100% - 32px);
+    padding: 16px;
+  }
 }
 
 /* FORM */
@@ -279,7 +296,7 @@ id="bookingForm">
 <h2 class="section-title">Request to Cancel Your Event</h2>
 
 <div class="calendar-note">
-  ⚠️ if  your Cancellation request is not  confirmed  to your email  within 24 hours please Contact DJ Angi 
+  ⚠️ if  your Cancellation request is not  confirmaed  to your email  within 24 hours please Contact DJ Angi 
 </div>
 
 <div class="deposit-instruction">
